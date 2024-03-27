@@ -1,0 +1,27 @@
+name: Node.js CI/CD
+
+on: [push]
+
+jobs:
+ deploy:
+   runs-on: ubuntu-latest
+   strategy:
+     fail-fast: false
+     matrix:
+       node-version: [18.x]
+
+
+steps:
+ - name: Deploy Test CI/CD
+   uses: appleboy/ssh-action@master
+   with:
+     host: ${{ secrets.HOST }}
+     username: ${{ secrets.USERNAME }}
+     password: ${{ secrets.PASSWORD }}
+     port: ${{ secrets.PORT }}
+     key: ${{ secrets.KEY }}
+     script: |
+            cd /home/mcgaiver/ci-cd # we move into our app's folder
+            pm2 stop all
+            git pull # we pull any changes from git
+            pm2 start all
