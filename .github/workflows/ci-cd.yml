@@ -14,4 +14,8 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.KEY }}
-        script: whoami
+        script: |
+           cd /home/mcgaiver/ci-cd
+           pm2 stop all
+           git pull
+           pm2 start all
