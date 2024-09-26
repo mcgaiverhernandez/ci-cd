@@ -18,4 +18,4 @@ jobs:
            cd /home/mcgaiver/ci-cd
            pm2 stop all
            git pull
-           npm run test
+           pm2 start all
